@@ -3,30 +3,37 @@ import { Container, Typography, TextField, Button, Box, Grid } from "@mui/materi
 function Flashcard({ front, back, flipped, onClick }) {
   return (
     <Box
-      onClick={onClick}
       sx={{
         perspective: 900, width: "100%", minHeight: 140, mb: 2,
         userSelect: "none", display: "flex", justifyContent: "center"
       }}
+      onClick={onClick}
     >
+      {/* Flipper */}
       <Box sx={{
-        width: "100%", maxWidth: 370, minHeight: 140, borderRadius: 6,
-        boxShadow: "0 8px 32px 0 rgba(125,90,49,0.13)",
-        backdropFilter: "blur(15px)", background: "rgba(255,255,255,0.80)",
-        cursor: "pointer", position: "relative", transition: "transform 0.44s cubic-bezier(.5,.21,.69,1.04)", transformStyle: "preserve-3d", transform: flipped ? "rotateY(180deg)" : "none"
+        position: "relative", width: 370, minHeight: 140, height: "100%",
+        borderRadius: 6, boxShadow: "0 8px 32px 0 rgba(125,90,49,0.13)",
+        backdropFilter: "blur(15px)", background: "none",
+        cursor: "pointer", transition: "transform 0.44s cubic-bezier(.5,.21,.69,1.04)",
+        transformStyle: "preserve-3d",
+        transform: flipped ? "rotateY(180deg)" : "none"
       }}>
+        {/* Front Side */}
         <Box sx={{
-          position: "absolute", width: "100%", height: "100%", backfaceVisibility: "hidden",
-          display: "flex", alignItems: "center", justifyContent: "center", padding: 2, borderRadius: 6
+          position: "absolute", width: "100%", height: "100%", top: 0, left: 0,
+          backfaceVisibility: "hidden", background: "rgba(255,255,255,0.80)", borderRadius: 6,
+          display: "flex", alignItems: "center", justifyContent: "center", padding: 2
         }}>
           <Typography variant="h6" align="center" sx={{
             fontSize: 23, color: "#482908", fontFamily: "'Playfair Display', serif"
           }}>{front}</Typography>
         </Box>
+        {/* Back Side */}
         <Box sx={{
-          position: "absolute", width: "100%", height: "100%", backfaceVisibility: "hidden",
-          display: "flex", alignItems: "center", justifyContent: "center", padding: 2, borderRadius: 6,
-          transform: "rotateY(180deg)", background: "rgba(245,234,210,0.88)"
+          position: "absolute", width: "100%", height: "100%", top: 0, left: 0,
+          backfaceVisibility: "hidden", background: "rgba(245,234,210,0.88)", borderRadius: 6,
+          display: "flex", alignItems: "center", justifyContent: "center", padding: 2,
+          transform: "rotateY(180deg)"
         }}>
           <Typography variant="h6" align="center" sx={{
             fontSize: 23, color: "#5B3622", fontFamily: "'Playfair Display', serif"
@@ -36,6 +43,7 @@ function Flashcard({ front, back, flipped, onClick }) {
     </Box>
   );
 }
+
 function StudyTools() {
   const [cards, setCards] = useState([]);
   const [front, setFront] = useState("");
